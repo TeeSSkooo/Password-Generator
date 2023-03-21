@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import PasswordStrengthBar from 'react-password-strength-bar';
 
 import ToggleButton from 'components/UI/toggle-button/ToggleButton';
 import Range from 'components/UI/range/Range';
@@ -33,12 +34,19 @@ const PasswordGenerator: FC = () => {
     <div>
       <h1 className="mb-[25px] text-center text-xl text-[#888597]">Password Generator</h1>
       {password && (
-        <div className="flex justify-between items-center flex-col gap-[15px] mb-[20px] px-[25px] py-[15px] bg-[#24232b] min-[380px]:flex-row">
-          <span className="text-lg text-white min-[330px]:text-xl">{password}</span>
-          <button>
-            <img src={copy} alt="Copy" />
-          </button>
-        </div>
+        <>
+          <div className="flex justify-between items-center flex-col gap-[15px] mb-[20px] px-[25px] py-[15px] bg-[#24232b] min-[380px]:flex-row">
+            <span className="text-lg text-white min-[330px]:text-xl">{password}</span>
+            <button>
+              <img src={copy} alt="Copy" />
+            </button>
+          </div>
+          <PasswordStrengthBar
+            className="mb-[25px]"
+            password={password}
+            barColors={['#ddd', '#b04202', '#f6b44d', '#2b90ef', '#82df8e']}
+          />
+        </>
       )}
       <div className="p-[25px] bg-[#24232b]">
         <div className="mb-[20px] flex justify-between items-center">
