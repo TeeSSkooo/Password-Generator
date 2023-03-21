@@ -1,0 +1,22 @@
+.range {
+  -webkit-appearance: none;
+
+  @apply w-full
+         h-[7px]
+         cursor-pointer
+         bg-[#15141c]
+         transition-all;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+
+  @apply w-[25px] 
+         h-[25px]
+         border-[2px]
+         border-solid
+         border-[#acfdb1]
+         rounded-[50%]
+         bg-[#15141c]
+         transition-all;
+}

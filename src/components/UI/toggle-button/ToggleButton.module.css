@@ -1,0 +1,50 @@
+.checkbox {
+  @apply absolute
+         z-10
+         top-0
+         left-0
+         w-full
+         h-full
+         opacity-0
+         cursor-pointer;
+}
+
+.checkbox:checked + .toggleBtn {
+  @apply bg-[#82df8e];
+}
+
+.checkbox:checked + .toggleBtn .switcher {
+  @apply left-full
+         border-[#a3fbae]
+         bg-[#131218]
+         -translate-x-full
+         -translate-y-1/2;
+}
+
+.toggleBtn {
+  @apply relative
+         w-[35px]
+         h-[15px]
+         rounded-[999px]
+         cursor-pointer
+         bg-[#808080]
+         transition-all
+         duration-200;
+}
+
+.switcher {
+  @apply absolute
+         top-1/2
+         left-0
+         w-[20px]
+         h-[20px]
+         border-[2px]
+         border-solid
+         border-transparent
+         rounded-[50%]
+         bg-[#393939]
+         translate-x-0
+         -translate-y-1/2
+         transition-all
+         duration-200;
+}
