@@ -1,0 +1,15 @@
+.notification {
+  @apply absolute 
+         bottom-[20px] 
+         -left-full
+         w-[250px] 
+         border-[2px] 
+         border-[#acfdb1] 
+         flex 
+         justify-between 
+         items-center 
+         p-[5px] 
+         bg-[#34354d]
+         transition-all
+         duration-700;
+}

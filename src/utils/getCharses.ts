@@ -1,7 +1,4 @@
-const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
-const NUMBERS = '0123456789';
-const SYMBOLS = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+import { UPPERCASE, LOWERCASE, NUMBERS, SYMBOLS } from 'constants/password';
 
 export default function getCharset(options: {
   includeUppercase: boolean;

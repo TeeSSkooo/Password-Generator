@@ -1,8 +1,9 @@
-import { FC, useState } from 'react';
+import { FC, useState, useRef } from 'react';
 import PasswordStrengthBar from 'react-password-strength-bar';
 
 import ToggleButton from 'components/UI/toggle-button/ToggleButton';
 import Range from 'components/UI/range/Range';
+import Notification from 'components/UI/notification/Notification';
 
 import generatePassword from 'utils/generatePassword';
 
@@ -19,7 +20,10 @@ const PasswordGenerator: FC = () => {
   const [includeNumbers, setIncludeNumbers] = useState<boolean>(true);
   const [includeSymbols, setIncludeSymbols] = useState<boolean>(true);
 
-  const handleClick = () => {
+  const outputPassRef = useRef<HTMLSpanElement | null>(null);
+  const notificationRef = useRef<HTMLDivElement | null>(null);
+
+  const generate = () => {
     setPassword(
       generatePassword(charLength, {
         includeUppercase,
@@ -30,14 +34,32 @@ const PasswordGenerator: FC = () => {
     );
   };
 
+  const copyPassword = () => {
+    if (outputPassRef.current) {
+      navigator.clipboard.writeText(outputPassRef.current.textContent || '').then(() => {
+        if (notificationRef.current) {
+          notificationRef.current.style.left = '20px';
+        }
+
+        setTimeout(() => {
+          if (notificationRef.current) {
+            notificationRef.current.style.left = '-100%';
+          }
+        }, 3000);
+      });
+    }
+  };
+
   return (
     <div>
       <h1 className="mb-[25px] text-center text-xl text-[#888597]">Password Generator</h1>
       {password && (
         <>
           <div className="flex justify-between items-center flex-col gap-[15px] mb-[20px] px-[25px] py-[15px] bg-[#24232b] min-[380px]:flex-row">
-            <span className="text-lg text-white min-[330px]:text-xl">{password}</span>
-            <button>
+            <span className="text-lg text-white min-[330px]:text-xl" ref={outputPassRef}>
+              {password}
+            </span>
+            <button onClick={copyPassword}>
               <img src={copy} alt="Copy" />
             </button>
           </div>
@@ -72,13 +94,14 @@ const PasswordGenerator: FC = () => {
             <span className={styles.label}>Include Symbols</span>
           </div>
         </div>
-        <button className={styles.btn} onClick={handleClick}>
+        <button className={styles.btn} onClick={generate}>
           <span className="uppercase text-[#acfdb1]">generate</span>
           <span>
             <img className="transition-all duration-200" src={arrow} alt="Arrow" />
           </span>
         </button>
       </div>
+      <Notification ref={notificationRef} />
     </div>
   );
 };
